@@ -302,7 +302,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    res.status(200).send('Backend is working!');
+    res.status(200).send('Backend is working! ', process.env);
 });
 
 // Global error handler
@@ -322,7 +322,6 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
-console.log(process.env)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -303,7 +303,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    res.status(200).send('Backend is working! ', process.env.MONGO_URI);
+    res.status(200).send('Backend is working! ');
 });
 
 // Global error handler

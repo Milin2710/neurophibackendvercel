@@ -308,8 +308,10 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    res.status(200).send('Backend is working! ', req.headers.origin);
+    const origin = req.headers.origin || "unknown origin";
+    res.status(200).send(`Backend is working! Request origin: ${origin}`);
 });
+
 
 // Global error handler
 app.use((err, req, res, next) => {

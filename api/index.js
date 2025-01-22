@@ -330,7 +330,7 @@ app.use((err, req, res, next) => {
 
 // Your error handler and port configuration remain the same
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://neurophi.tech"); // Set your frontend domain
+  res.header("Access-Control-Allow-Origin", "*"); // Set your frontend domain
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();

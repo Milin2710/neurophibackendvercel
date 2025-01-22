@@ -18,7 +18,7 @@ const options = [
     origin: '*',
     methods: '*',
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    // credentials: true,
   })
 ];
 
@@ -336,10 +336,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.options('*', cors({
-  origin: 'https://neurophi.tech',
-  credentials: true,
-}));
+// app.options('*', cors({
+//   origin: 'https://neurophi.tech',
+//   credentials: true,
+// }));
 
 
 const PORT = process.env.PORT || 5000;

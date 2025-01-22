@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 app.use(express.static(path.join(__dirname, "../build")));
 // Middleware
-app.use(cors({ origin: "https://neurophi.tech/api", credentials: true }));
+app.use(cors({ origin: "https://neurophi.tech", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined")); // Logging
@@ -51,7 +51,7 @@ const contactUsSchema = new mongoose.Schema(
 const Contactus = mongoose.model("Contactus", contactUsSchema);
 
 // Signup
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -128,7 +128,7 @@ app.post("/signup", async (req, res) => {
 });
 
 // Verify OTP Route
-app.post("/verify-otp", async (req, res) => {
+app.post("/api/verify-otp", async (req, res) => {
   const { email, otp } = req.body;
 
   try {
@@ -163,7 +163,7 @@ app.post("/verify-otp", async (req, res) => {
 });
 
 // Login
-app.post("/login", async (req, res, next) => {
+app.post("/api/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -210,7 +210,7 @@ app.post("/login", async (req, res, next) => {
 });
 
 // Contact
-app.post("/contact", async (req, res, next) => {
+app.post("/api/contact", async (req, res, next) => {
   try {
     const { name, email, company, message } = req.body;
 
@@ -228,7 +228,7 @@ app.post("/contact", async (req, res, next) => {
 });
 
 // Send OTP
-app.post("/sendotp", async (req, res) => {
+app.post("/api/sendotp", async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -262,7 +262,7 @@ app.post("/sendotp", async (req, res) => {
   }
 });
 
-app.post("/resetpassword", async (req, res) => {
+app.post("/api/resetpassword", async (req, res) => {
   const { email, otp, newPassword } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -285,7 +285,7 @@ app.post("/resetpassword", async (req, res) => {
   }
 });
 
-app.post("/islogin", async (req, res) => {
+app.post("/api/islogin", async (req, res) => {
   const { neurophilogin } = req.cookies;
   if (!neurophilogin) return res.status(401).json("something went wrong");
   jwt.verify(neurophilogin, process.env.JWT_SECRET, (err, info) => {
@@ -297,7 +297,7 @@ app.post("/islogin", async (req, res) => {
   });
 });
 
-app.post("/logout", (req, res) => {
+app.post("/api/logout", (req, res) => {
   res.cookie("neurophilogin", "").json("Logged out");
 });
 

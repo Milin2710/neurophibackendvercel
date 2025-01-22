@@ -13,12 +13,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: 'https://neurophi.tech', // Allow only your domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // If you need cookies/authentication
-}));
+const options = [
+  cors({
+    origin: '*',
+    methods: '*',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+];
+
+app.use(options);
 
 // app.use(express.json());
 app.use(cookieParser());

@@ -14,10 +14,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "https://neurophi.tech", // Replace with your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  credentials: true, // Allow cookies and credentials
+  origin: '*',  // Allow all origins
+  methods: 'GET,POST,PUT,DELETE', // Allow necessary HTTP methods
+  allowedHeaders: 'Content-Type, Authorization',  // Allow necessary headers
+  credentials: true,  // Allow cookies if needed
 }));
 app.use(express.json());
 app.use(cookieParser());

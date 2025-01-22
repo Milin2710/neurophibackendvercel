@@ -13,7 +13,12 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: "https://neurophi.tech", credentials: true }));
+app.use(cors({
+  origin: "https://neurophi.tech", // Replace with your frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  credentials: true, // Allow cookies and credentials
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined")); // Logging
@@ -303,7 +308,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    res.status(200).send('Backend is working! ');
+    res.status(200).send('Backend is working! ', req.headers.origin);
 });
 
 // Global error handler

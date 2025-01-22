@@ -167,7 +167,7 @@ app.post("/api/verify-otp", async (req, res) => {
 });
 
 // Login
-app.post("/api/login", async (req, res, next) => {
+app.post("/api/login", cors(), async (req, res, next) => {
   try {
     const { email, password } = req.body;
 

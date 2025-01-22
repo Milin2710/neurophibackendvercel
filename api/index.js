@@ -11,12 +11,13 @@ const nodemailer = require("nodemailer");
 const path = require("path");
 dotenv.config();
 const app = express();
-app.use(express.static(path.join(__dirname, "../build")));
+
 // Middleware
 app.use(cors({ origin: "https://neurophi.tech", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined")); // Logging
+app.use(express.static(path.join(__dirname, "../build")));
 
 // Connect to MongoDB
 mongoose
@@ -302,7 +303,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    res.status(200).send('Backend is working! ', process.env);
+    res.status(200).send('Backend is working! ', process.env.MONGO_URI);
 });
 
 // Global error handler

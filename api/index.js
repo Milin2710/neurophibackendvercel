@@ -13,14 +13,14 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const options = [
-  cors({
-    origin: '*',
-    methods: '*',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    // credentials: true,
-  })
-];
+const corsOptions = {
+  origin: ["http://localhost:3000", "https://neurophi.tech"], // Allowed origins
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Enable cookies/credentials
+};
+
+app.use(cors(corsOptions));
 
 app.use(options);
 
@@ -330,11 +330,13 @@ app.use((err, req, res, next) => {
 
 // Your error handler and port configuration remain the same
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Set your frontend domain
+  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
+
 
 // app.options('*', cors({
 //   origin: 'https://neurophi.tech',

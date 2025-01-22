@@ -14,9 +14,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "https://neurophi.tech",
-  credentials: true, // Allow cookies
+  origin: 'https://neurophi.tech', // Allow only your domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // If you need cookies/authentication
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined")); // Logging

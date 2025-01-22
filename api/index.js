@@ -51,7 +51,7 @@ const contactUsSchema = new mongoose.Schema(
 const Contactus = mongoose.model("Contactus", contactUsSchema);
 
 // Signup
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {

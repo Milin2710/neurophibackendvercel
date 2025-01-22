@@ -316,10 +316,13 @@ app.get("*", (req, res) => {
 });
 
 // Your error handler and port configuration remain the same
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Internal server error" });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://neurophi.tech"); // Set your frontend domain
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

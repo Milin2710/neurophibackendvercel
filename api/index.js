@@ -26,36 +26,36 @@ app.use(morgan("combined")); // Logging
 // app.use(express.static(path.join(__dirname, "../build")));
 
 // Connect to MongoDB
-// mongoose
-//   .connect(process.env.MONGO_URI)
-//   .then(() => console.log("MongoDB Connected"))
-//   .catch((err) => console.error("MongoDB connection error:", err));
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-// const userSchema = new mongoose.Schema(
-//   {
-//     name: { type: String, required: true },
-//     email: { type: String, required: true, unique: true },
-//     password: { type: String, required: true },
-//     otp: { type: String, required: false },
-//     otpExpiresAt: { type: Date, required: false },
-//     isVerified: { type: Boolean, default: false },
-//   },
-//   { timestamps: true }
-// );
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    otp: { type: String, required: false },
+    otpExpiresAt: { type: Date, required: false },
+    isVerified: { type: Boolean, default: false },
+  },
+  { timestamps: true }
+);
 
-// const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-// const contactUsSchema = new mongoose.Schema(
-//   {
-//     name: { type: String, required: true },
-//     email: { type: String, required: true },
-//     company: { type: String, required: true },
-//     message: { type: String, required: true },
-//   },
-//   { timestamps: true }
-// );
+const contactUsSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    company: { type: String, required: true },
+    message: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
-// const Contactus = mongoose.model("Contactus", contactUsSchema);
+const Contactus = mongoose.model("Contactus", contactUsSchema);
 
 // Signup
 app.post("/api/signup", async (req, res) => {

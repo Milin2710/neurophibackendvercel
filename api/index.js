@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const morgan = require("morgan");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const path = require("path");
+// const path = require("path");
 dotenv.config();
 const app = express();
 
@@ -20,42 +20,42 @@ app.use(cors({
   credentials: true, // If you need cookies/authentication
 }));
 
-app.use(express.json());
+// app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("combined")); // Logging
-app.use(express.static(path.join(__dirname, "../build")));
+// app.use(express.static(path.join(__dirname, "../build")));
 
 // Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch((err) => console.error("MongoDB connection error:", err));
 
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    otp: { type: String, required: false },
-    otpExpiresAt: { type: Date, required: false },
-    isVerified: { type: Boolean, default: false },
-  },
-  { timestamps: true }
-);
+// const userSchema = new mongoose.Schema(
+//   {
+//     name: { type: String, required: true },
+//     email: { type: String, required: true, unique: true },
+//     password: { type: String, required: true },
+//     otp: { type: String, required: false },
+//     otpExpiresAt: { type: Date, required: false },
+//     isVerified: { type: Boolean, default: false },
+//   },
+//   { timestamps: true }
+// );
 
-const User = mongoose.model("User", userSchema);
+// const User = mongoose.model("User", userSchema);
 
-const contactUsSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    company: { type: String, required: true },
-    message: { type: String, required: true },
-  },
-  { timestamps: true }
-);
+// const contactUsSchema = new mongoose.Schema(
+//   {
+//     name: { type: String, required: true },
+//     email: { type: String, required: true },
+//     company: { type: String, required: true },
+//     message: { type: String, required: true },
+//   },
+//   { timestamps: true }
+// );
 
-const Contactus = mongoose.model("Contactus", contactUsSchema);
+// const Contactus = mongoose.model("Contactus", contactUsSchema);
 
 // Signup
 app.post("/api/signup", async (req, res) => {
@@ -320,9 +320,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Internal server error" });
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
+// });
 
 // Your error handler and port configuration remain the same
 app.use((req, res, next) => {

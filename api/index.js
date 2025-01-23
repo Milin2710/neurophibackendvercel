@@ -314,8 +314,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-    const origin = req.headers.origin || "unknown origin";
-    res.status(200).send(`Backend is working! Request origin: ${origin}`);
+    res.status(200).send(`Backend is working!`);
 });
 
 

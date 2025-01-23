@@ -330,12 +330,19 @@ app.use((err, req, res, next) => {
 
 // Your error handler and port configuration remain the same
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Your frontend's origin
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allowed methods
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allowed headers
+  res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies, authorization headers, etc.
+
+  // Handle OPTIONS request (for preflight)
+  if (req.method === "OPTIONS") {
+    return res.status(200).end(); // Respond with a successful status for OPTIONS preflight
+  }
+
   next();
 });
+
 
 
 // app.options('*', cors({
